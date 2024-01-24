@@ -1,15 +1,18 @@
 package commands
 
 import (
+	"fmt"
 	"time"
 	task "timegopher/models"
 )
 
 func AddTask(name string, description string, completed bool, startTime time.Time) task.Task {
 	var task task.Task
-	task.Name = name
-	task.Description = description
-	task.Completed = completed
+	fmt.Println("Please enter the name of the task:")
+	fmt.Scanln(&task.Name)
+	fmt.Println("Please enter the description of the task:")
+	fmt.Scanln(&task.Description)
+
 
 	return task
 }

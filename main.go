@@ -1,23 +1,22 @@
 package main
 
 import (
-	"fmt"
-	task "timegopher/models"
 	"flag"
+	"fmt"
+	"os"
 )
 
 func main() {
-	var task task.Task
-	task.Name = "Laundry"
-	task.Description = "Wash the laundry"
-	task.Completed = false
-
-	fmt.Println(task.Name)
-
-	flag.StringVar(&task.Name, "name", "", "Name of the task")
-	flag.StringVar(&task.Description, "description", "", "Description of the task")
-	flag.BoolVar(&task.Completed, "completed", false, "Whether or not the task is completed")
+	var cmd string
+	flag.StringVar(&cmd, "command", "", "command to execute")
 
 	flag.Parse()
-	fmt.Println(task.Name)
+
+	// Check if the command is provided
+	if cmd == "" {
+		fmt.Println("Please provide a command using the -command flag.")
+		os.Exit(1)
+	}
+
+	fmt.Println("Command:", cmd)
 }
