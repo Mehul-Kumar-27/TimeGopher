@@ -2,21 +2,25 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"os"
+	gopherCommands "timegopher/commands"
+	customLogger "timegopher/logger"
 )
 
 func main() {
 	var cmd string
+	customLogger := customLogger.CreateCustomLogger()
 	flag.StringVar(&cmd, "command", "", "command to execute")
 
 	flag.Parse()
 
-	// Check if the command is provided
-	if cmd == "" {
-		fmt.Println("Please provide a command using the -command flag.")
-		os.Exit(1)
+	switch cmd {
+	case "add":
+		gopherCommands.AddTask()
+	case "list":
+		gopherCommands.GetTasks()
+	case "complete":
+		gopherCommands.SelectAndCompleteTask()
+	default:
+		customLogger.Fatalln("Please provide a valid command")
 	}
-
-	fmt.Println("Command:", cmd)
 }
